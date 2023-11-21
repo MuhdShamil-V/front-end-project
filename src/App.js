@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Components/Dealer/Login';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import AllProducts from './Components/Dealer/AllProducts';
+
 import Addproduct from './Components/Dealer/AddProduct';
 import UserRegister from './Components/User/UserRegister';
 import Admin from './Components/Dealer/Admin';
@@ -18,15 +18,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin/allproducts" element={<Admin />} />
           <Route path='admin' element={<Admin />} />
-          <Route path="/admin/allproducts" element={<AllProducts />} />
-          <Route path="/admin/addproduct" element={<Addproduct />} />
+          <Route path="/admin/addproducts" element={<Admin />} />
           <Route path="/registration" element={<UserRegister />} />
-          <Route path="/userslist" element={<UserList />} />
+          <Route path="/admin/userslist" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </Provider>
   );
 }
 
-export default App;
+export default App;                                   

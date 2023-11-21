@@ -26,8 +26,6 @@ function UserList() {
     }
   };
 
- 
-
   useEffect(() => {
     fetchUsers();
   }, [token]);
@@ -42,7 +40,7 @@ function UserList() {
       const { status, message } = response.data;
       if (status === 'success') {
         console.log('User deleted.');
-        setIsdelete([...isdelete, "User deleted."]);
+        setIsdelete([...isdelete, 'User deleted.']);
         fetchUsers();
       } else {
         console.error('User deletion failed. Message:', message);
@@ -54,32 +52,45 @@ function UserList() {
 
   const handleRemove = (id) => {
     deleteUser(id, token);
+  }
+
+  const showUserInfo = (userId) => {
+    // You can perform any action related to showing user information here
+    console.log(`Show user info for user with ID: ${userId}`);
+    // For example, you might want to fetch more details about the user and display them
   };
-
-
   return (
     <div>
       {users ? (
-        <table>
+        <table className="min-w-full border border-black text-white">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Action</th>
-              {/* Add more table headers as needed */}
+            <tr className="bg-emerald-300">
+              <th className="border border-emerald-300 py-2 px-4 text-black">ID</th>
+              <th className="border border-emerald-300 py-2 px-4 text-black">Username</th>
+              <th className="border border-emerald-300 py-2 px-4 text-black">Email</th>
+              <th className="border border-emerald-300 py-2 px-4 text-black">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
-              <tr key={user._id}>
-                <td>{index+1}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>
-                  <button onClick={() => handleRemove(user._id)}>Remove</button>
+              <tr key={user._id} className={index % 2 === 0 ? 'bg-sky-950' : 'bg-sky-800 text-black'}>
+                <td className="border border-emerald-300 py-2 px-4">{index + 1}</td>
+                <td className="border border-emerald-300 py-2 px-4">{user.username}</td>
+                <td className="border border-emerald-300 py-2 px-4">{user.email}</td>
+                <td className="border border-emerald-300 py-2 px-4">
+                  <button
+                    className="bg-blue-600 hover:bg-blue-800 text-white py-1 px-2 rounded mr-2"
+                    onClick={() => showUserInfo(user._id)}
+                  >
+                    Show
+                  </button>
+                  <button
+                    className="bg-red-600 hover:bg-red-800 text-white py-1 px-2 rounded"
+                    onClick={() => handleRemove(user._id)}
+                  >
+                    Remove
+                  </button>
                 </td>
-                {/* Add more table cells as needed */}
               </tr>
             ))}
           </tbody>

@@ -95,8 +95,8 @@ function GetAllproduct() {
   };
 
   return (
-    <div className='p-4'>
-      <button className="bg-cyan-800 text-white py-2 px-4 rounded mb-4" onClick={handleGetAllProducts}>
+    <div className='p-4 w-full h-full'>
+      <button className="bg-emerald-300 hover:bg-emerald-500 text-black py-2 px-4 rounded mb-4" onClick={handleGetAllProducts}>
         GetAllproduct
       </button>
       <div className="overflow-x-auto">
@@ -108,7 +108,6 @@ function GetAllproduct() {
               <th className="py-2 px-4 w-1/6 sm:w-1/3">Price</th>
               <th className="py-2 px-4 w-1/6 sm:w-1/6">Category</th>
               <th className="py-2 px-4 w-1/6 sm:w-1/6">Image</th>
-              <th className="py-2 px-4 w-1/6 sm:w-1/6">Description</th>
               <th className="py-2 px-4 w-1/6 sm:w-1/6">Edit</th>
               <th className="py-2 px-4 w-1/6 sm:w-1/6">Delete</th>
             </tr>
@@ -118,12 +117,11 @@ function GetAllproduct() {
               <tr key={product._id} className='bg-gray-900 text-white' onClick={() => handleProductClick(product)}>
                 <td className="py-2 px-4 w-1/12 sm:w-1/6">{index + 1}</td>
                 <td className="py-2 px-4 w-1/6 sm:w-1/3">{product.title}</td>
-                <td className="py-2 px-4 w-1/6 sm:w-1/3">{product.price}</td>
+                <td className="py-2 px-4 w-1/6 sm:w-1/3">₹ {product.price}</td>
                 <td className="py-2 px-4 w-1/6 sm:w-1/6">{product.category}</td>
                 <td className="py-2 px-4 w-1/6 sm:w-1/6">
                   <img src={product.image} alt={product.title} className="w-20 h-20" />
                 </td>
-                <td className="py-2 px-4 w-1/6 sm:w-1/6">{product.description}</td>
                 <td className="py-2 px-4 w-1/6 sm:w-1/6">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={()=>handleEdit(product._id)}>
                     Edit

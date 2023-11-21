@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/authSlice';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+
+
 
 function Addproduct() {
   const token = useSelector(selectToken);
@@ -10,8 +11,8 @@ function Addproduct() {
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null); // Add state for image
-  const navigate = useNavigate();
+  const [image, setImage] = useState(null); 
+  
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -21,8 +22,7 @@ function Addproduct() {
     formData.append('category', category);
     formData.append('description', description);
     formData.append('price', price);
-    formData.append('img', image); // Append image data
-
+    formData.append('img', image);
     try {
       const response = await axios.post(
         'https://ecommerce-api.bridgeon.in/products',
@@ -37,9 +37,13 @@ function Addproduct() {
 
       const { status, message, data } = response.data;
       if (status === 'success') {
-        // Product added successfully.
         console.log('Product added. Product details:', data);
-      
+        // Clear the input fields
+        setTitle('');
+        setCategory('');
+        setDescription('');
+        setPrice('');
+        setImage(null);
       } else {
         console.error('Product addition failed. Message:', message);
       }
@@ -61,6 +65,7 @@ function Addproduct() {
             type="text"
             name="name"
             id="name"
+            required
             placeholder="Product Name"
             onChange={(e) => setTitle(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2"
@@ -69,6 +74,7 @@ function Addproduct() {
             type="text"
             name="category"
             id="catogery"
+            required
             placeholder="Category"
             onChange={(e) => setCategory(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2"
@@ -76,6 +82,7 @@ function Addproduct() {
           <textarea
             name="description"
             id="description"
+            required
             placeholder="Product Description"
             onChange={(e) => setDescription(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2"
@@ -84,6 +91,7 @@ function Addproduct() {
             type="number"
             name="price"
             id="price"
+            required
             placeholder="Product Price"
             onChange={(e) => setPrice(e.target.value)}
             className="border border-gray-300 rounded-md px-3 py-2"
@@ -92,32 +100,21 @@ function Addproduct() {
             type="file"
             name="img"
             id="img"
+           required
             placeholder="img"
-            onChange={(e) => setImage(e.target.files[0])} // Set image data
+            onChange={(e) => setImage(e.target.files[0])}
             className="border border-gray-300 rounded-md px-3 py-2"
           />
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-emerald-300 hover:bg-emerald-500 text-black font-bold py-2 px-4 rounded"
           >
             Add Product
           </button>
         </form>
       </div>
-      <button
-        onClick={() => navigate('/getallpro')}
-        className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        View All Products
-      </button>
-      <button
-        onClick={() => navigate('/getallusers')}
-        className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-      >
-        View All users
-      </button>
     </div>
   );
 }
 
-export default Addproduct;
+export default Addproduct;            
