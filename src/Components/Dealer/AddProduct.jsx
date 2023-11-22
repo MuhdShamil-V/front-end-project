@@ -38,7 +38,6 @@ function Addproduct() {
       const { status, message, data } = response.data;
       if (status === 'success') {
         console.log('Product added. Product details:', data);
-        // Clear the input fields
         setTitle('');
         setCategory('');
         setDescription('');

@@ -55,9 +55,7 @@ function UserList() {
   }
 
   const showUserInfo = (userId) => {
-    // You can perform any action related to showing user information here
     console.log(`Show user info for user with ID: ${userId}`);
-    // For example, you might want to fetch more details about the user and display them
   };
   return (
     <div>

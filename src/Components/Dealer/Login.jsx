@@ -17,14 +17,11 @@ function Login() {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  // const userToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZWFsZXJJZCI6IjY1NDA4ZjRkN2E2NmIyYTQ0MmY0M2ExNiIsImlhdCI6MTY5ODkxODc5MSwiZXhwIjoxNzMwNDU0NzkxfQ.-EK1a98jBLNXpTSxl90Jz4NP8NYdSB98kuD1H0KW4Rs"
-  // const tologin=(event)=>{
-  //   event.email.value==="@mail.com"?handleLogin(event):loginUser(event)
-  // }
+  
   const tologin = (event) => {
     const email = event.target.email.value;
-    const password=event.target.password.value;// /  const apiKey=""
-    const isAdmin = email === "shamil@mail.com"; // Replace with the actual admin email
+    const password=event.target.password.value;
+    const isAdmin = email === "shamil@mail.com";
     event.preventDefault();
    
    const accessKey="7c63073252c8740d7951"
@@ -58,7 +55,7 @@ function Login() {
       if (status === "success") {
         const token = data.token;
         console.log("Login successful. Token:", token);
-        dispatch(setToken(token)); // Dispatch the token to the Redux store
+        dispatch(setToken(token)); 
         navigation("/admin");
       } else {
         console.error("Login failed. Message:", message);

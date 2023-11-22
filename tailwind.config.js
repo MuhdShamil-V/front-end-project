@@ -1,13 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  plugins: [require('daisyui')],
+};
+export const theme = {
+  extend: {
+    backgroundImage: {
+   
+    
     },
-  },
-  plugins: [],
-}
 
+  },
+};
+export const plugins = [];

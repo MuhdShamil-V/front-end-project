@@ -4,12 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Components/Dealer/Login';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-
-import Addproduct from './Components/Dealer/AddProduct';
 import UserRegister from './Components/User/UserRegister';
-import Admin from './Components/Dealer/Admin';
-import UserList from './Components/Dealer/UserList';
 import Home from './Components/User/Home';
+import Admin from './Components/Dealer/Admin';
+import Collections from './Components/User/Collections';
 
 function App() {
   return (
@@ -17,9 +15,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/collections" element={<Collections />} />
           <Route path="/login" element={<Login />} />
+          <Route path='/admin' element={<Admin/>} />
           <Route path="/admin/allproducts" element={<Admin />} />
-          <Route path='admin' element={<Admin />} />
           <Route path="/admin/addproducts" element={<Admin />} />
           <Route path="/registration" element={<UserRegister />} />
           <Route path="/admin/userslist" element={<Admin />} />
