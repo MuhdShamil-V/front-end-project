@@ -1,0 +1,7 @@
+.pop-on-hover:hover {
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+    transition: transform 0.5s ease; /* Adjust the transition duration as needed */
+    color: blue;
+    
+}
+  

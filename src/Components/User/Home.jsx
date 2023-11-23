@@ -1,6 +1,7 @@
 import React from 'react'
 import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from 'mdb-react-ui-kit';
 import Navbar from './Navbar';
+import Slider from './slider';
 
 
 function Home() {
@@ -13,7 +14,7 @@ function Home() {
         <div className='w-4/6 h-1/2 flex justify-center items-center bg-white overflow-hidden'>
         <MDBCarousel className='w-full h-full flex justify-center items-center' fade>
       <MDBCarouselItem itemId={1}>
-        <img src='https://img.freepik.com/free-vector/perfume-promo-background-with-glass-bottle_107791-12305.jpg' className='' />
+        <img src='https://img.freepik.com/free-vector/perfume-promo-background-with-glass-bottle_107791-12305.jpg ' className='' />
         
       </MDBCarouselItem>
 
@@ -28,7 +29,7 @@ function Home() {
       </MDBCarouselItem>
     </MDBCarousel>
         </div>
-
+<Slider/>
        
     </div>
        
