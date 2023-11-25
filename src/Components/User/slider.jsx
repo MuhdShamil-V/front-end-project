@@ -3,7 +3,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 import axios from "axios";
 import {
   MDBContainer,
@@ -16,6 +15,7 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import { selectProducts, selectToken, setProducts } from "../../redux/authSlice";
+import '../User/slider.css'
 
 
 const responsive = {
@@ -42,6 +42,7 @@ const Slider = () => {
   const products = useSelector(selectProducts);
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
+  console.log("key",token)
 
   const dealerToken = token;
 
@@ -81,52 +82,54 @@ const Slider = () => {
         draggable={true}
         showDots={false}
         infinite={true}
-        
         partialVisible={true}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding"
         customTransition="transform 300ms ease-in"
       >
-        {products?.map((product) => (
-          <div className="bigcard"  style={{}}>
-            <Link to={`/add/${product._id}`}>
-            <MDBContainer fluid className="my-5">
-      <MDBRow className="justify-content-center">
-        <MDBCol md="8">
-          <MDBCard className="text-black">
-            <MDBCardImage
-              src={product.image}
-              position="top"
-              alt="..."
-            />
-            <MDBCardBody>
-              <div className="text-center">
-                <MDBCardTitle>{product.title}</MDBCardTitle>
-                <p className="text-muted mb-4">An Electric Magic</p>
-              </div>
-              <div>
-                <div className="d-flex justify-content-between">
-                  <span>Type:</span>
-                  <h6>{product.category}</h6>
-                </div>
-              </div>
-              <div className="d-flex justify-content-between total font-weight-bold mt-4">
-                <span>Price:</span>
-                <span>₹{product.price}</span>
-              </div>
-                <div className="d-flex justify-content-between" style={{color:'green'}}>
-                  <span>*Free Delevery</span>
-                </div>
-            </MDBCardBody>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
-    </Link>
+        {products.map((product) => (
+          <div className="bigcard" key={product._id} style={{ height: '500px' }}>
+            {/* Set a fixed height for the cards (adjust the height as needed) */}
+            <Link to={`/showproduct/${product._id}`}>
+              <MDBContainer fluid className="my-5">
+            <MDBRow className="justify-content-center">
+                <MDBCol md="8" className="h-3">
+                <MDBCard className="text-black">
+                  <div className="h-70">
+                    <MDBCardImage
+                    src={product.image}
+                    position="top"
+                    alt="..."
+                    />
+                    </div>
+                    <MDBCardBody>
+                    <div className="text-center">
+                        <MDBCardTitle>{product.title}</MDBCardTitle>
+                    </div>
+                    <div>
+                        <div className="d-flex justify-content-between">
+                        <span>Type:</span>
+                        <h6>{product.category}</h6>
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-between total font-weight-bold mt-4">
+                        <span>Price:</span>
+                        <span>₹{product.price}</span>
+                    </div>
+                        <div className="d-flex justify-content-between" style={{color:'green'}}>
+                        <span>*Free Delevery</span>
+                        </div>
+                    </MDBCardBody>
+                </MDBCard>
+                </MDBCol>
+            </MDBRow>
+            </MDBContainer>
+            </Link>
           </div>
         ))}
       </Carousel>
     </div>
   );
 };
+
 export default Slider;

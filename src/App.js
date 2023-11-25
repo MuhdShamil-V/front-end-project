@@ -8,6 +8,11 @@ import UserRegister from './Components/User/UserRegister';
 import Home from './Components/User/Home';
 import Admin from './Components/Dealer/Admin';
 import Collections from './Components/User/Collections';
+import Slider from './Components/User/slider';
+import Cart from './Components/User/Cart';
+import ShowProduct from './Components/User/ShowProduct';
+
+
 
 function App() {
   return (
@@ -22,6 +27,9 @@ function App() {
           <Route path="/admin/addproducts" element={<Admin />} />
           <Route path="/registration" element={<UserRegister />} />
           <Route path="/admin/userslist" element={<Admin />} />
+          {/* <Route path="/slider" element={<Slider />} /> */}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/showproduct/:id" element={<ShowProduct />} />
         </Routes>
       </BrowserRouter>
     </Provider>
