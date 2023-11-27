@@ -48,3 +48,12 @@
   opacity: 0.9;
   top: 0;
 }
+.home-qot {
+  font-family: 'Dancing Script', cursive;
+  font-size: 50px;
+}
+.qot-cont {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  color: teal;
+}

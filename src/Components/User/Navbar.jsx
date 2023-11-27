@@ -8,9 +8,9 @@ function Navbar() {
 
   const navigate = useNavigate();
   return (
-    <div className='main-bar bg-red-300'>
+    <div className='main-bar'>
         <div className='logo'>sdfghj</div>
-        <div className='flex gap-4 text-white font-thin'>
+        <div className='flex gap-4 text-black font-thin'>
             <button>About</button>
             <button>Contact</button>
             <button>Collections</button>
