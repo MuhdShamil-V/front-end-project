@@ -4,7 +4,7 @@ import '../Dealer/Login.css';
 import { useNavigate } from "react-router-dom";
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setToken } from "../../redux/authSlice";
+import { setToken, setUserToken ,setUserid} from "../../redux/authSlice";
 
 
 function Login() {
@@ -83,8 +83,8 @@ function Login() {
         console.log(data)
         const token = data.token;
         setName(data._id)
-        alert(name)
-
+        dispatch(setUserToken(data.token))
+        dispatch(setUserid(data.userId))
         console.log('Login successful. Token:', token);
         navigation('/')
       } else {

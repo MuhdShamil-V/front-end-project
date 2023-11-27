@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectToken, selectProducts, addToCart } from '../../redux/authSlice';
+import { useSelector } from 'react-redux';
+import { selectToken, selectProducts, selectUserToken, selectUserid,  } from '../../redux/authSlice';
 import { MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 
 function ShowProduct() {
@@ -10,7 +10,9 @@ function ShowProduct() {
   const [productDetails, setProductDetails] = useState({});
   const token = useSelector(selectToken);
   const allProducts = useSelector(selectProducts);
-  const dispatch = useDispatch();
+  const userid = useSelector(selectUserid);
+  const userToken = useSelector(selectUserToken);
+
 
   useEffect(() => {
     getProductById(id, token, allProducts);
@@ -44,36 +46,36 @@ function ShowProduct() {
     }
   };
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = async (productId) => {
     try {
-      // Fetch the product details if not available
-      if (!productDetails._id) {
-        await getProductById(id, token, allProducts);
-      }
-
-      // Dispatch the addToCart action with the product details
-      dispatch(addToCart(productDetails));
-
-      // Add the product to the cart through API call
-      const response = await axios.post(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
-        productId: productDetails._id,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const { status, message } = response.data;
-      if (status === 'success') {
-        // Product added to cart successfully.
+      console.log("Adding product to cart...");
+      console.log("Product ID:", productId);
+      console.log("User ID:", userid);
+      console.log("User Token:", userToken);
+  
+      const response = await axios.post(
+        `https://ecommerce-api.bridgeon.in/users/${userid}/cart/${productId}`,
+        null, // Assuming no data payload, pass null if not needed
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`,
+          },
+        }
+      );
+  
+  // Log the response from the server
+  
+      if (response.data.status === 'success') {
         console.log('Product added to cart.');
+        alert.success("product added to cart  succussfully")
       } else {
-        console.error('Product addition to cart failed. Message:', message);
+        console.error('Product addition to cart failed. Message:', response.data.message);
       }
     } catch (error) {
       console.error('Error:', error.message);
     }
   };
+
 
   return (
     <div>
@@ -102,7 +104,7 @@ function ShowProduct() {
                   <MDBBtn
                     className="me-1"
                     style={{ backgroundColor: "black" }}
-                    onClick={handleAddToCart}
+                    onClick={()=>handleAddToCart(productDetails._id)}
                   >
                     Add to cart
                   </MDBBtn>

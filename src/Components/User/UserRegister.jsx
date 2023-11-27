@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import '../User/Register.css';
-import { setUserToken } from '../../redux/authSlice';
+import { setUserToken, setUserid } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { MdAlternateEmail } from "react-icons/md";
@@ -25,7 +25,10 @@ function Signup() {
         });
         const { status, message, data } = response.data;
         if (status === 'success') {
+          console.log("id",data.userId)
           dispatch(setUserToken(data.token))
+          dispatch(setUserid(data.userId))
+
           navigate('/login')
           console.log('Registration successful. Token:', data.token);
         } else {

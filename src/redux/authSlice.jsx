@@ -9,6 +9,7 @@ export const authSlice = createSlice({
     userToken: localStorage.getItem('userToken') || null,
     isSignIn: true,
     isCart: false,
+    userId: localStorage.getItem('userId')|| null,
   },
   reducers: {
     setToken: (state, action) => {
@@ -16,7 +17,7 @@ export const authSlice = createSlice({
       localStorage.setItem('token', action.payload);
     },
     setUserToken: (state, action) => {
-      state.userToken = action.payload; // Corrected line
+      state.userToken = action.payload;
       localStorage.setItem('userToken', action.payload);
     },
     setSignIn: (state, action) => {

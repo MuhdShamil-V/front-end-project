@@ -8,7 +8,6 @@ import UserRegister from './Components/User/UserRegister';
 import Home from './Components/User/Home';
 import Admin from './Components/Dealer/Admin';
 import Collections from './Components/User/Collections';
-import Slider from './Components/User/slider';
 import Cart from './Components/User/Cart';
 import ShowProduct from './Components/User/ShowProduct';
 
