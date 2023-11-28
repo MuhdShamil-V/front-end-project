@@ -4,13 +4,16 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectToken, selectProducts, selectUserToken, selectUserid,  } from '../../redux/authSlice';
 import { MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
+import HeartIcon from './HeartIcon';
+
 
 function ShowProduct() {
+
   const { id } = useParams();
   const [productDetails, setProductDetails] = useState({});
   const token = useSelector(selectToken);
   const allProducts = useSelector(selectProducts);
-  const userid = useSelector(selectUserid);
+  const userId = useSelector(selectUserid);
   const userToken = useSelector(selectUserToken);
 
 
@@ -50,11 +53,11 @@ function ShowProduct() {
     try {
       console.log("Adding product to cart...");
       console.log("Product ID:", productId);
-      console.log("User ID:", userid);
+      console.log("User ID:", userId);
       console.log("User Token:", userToken);
   
       const response = await axios.post(
-        `https://ecommerce-api.bridgeon.in/users/${userid}/cart/${productId}`,
+        `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
         null, // Assuming no data payload, pass null if not needed
         {
           headers: {
@@ -76,11 +79,36 @@ function ShowProduct() {
     }
   };
 
+  const handleWishlist = async (productId) => {
+    try{
+      console.log("adding product to wishlist...");
+      console.log("productId:", productId);
+      console.log("userID", userId);
+      console.log("userToken", userToken);
+
+      const response = await axios.post(`https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`, null,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      });
+
+      if (response.data.status === "success") {
+        console.log("product added to wishlist");
+        alert.success("product added to wishlist successfully")
+      } else {
+        console.log('product addition to wishlist failed. message:', response.data.message)
+      }
+    } catch(error) {
+      console.error('Error', error.message);
+    }
+  };
+
 
   return (
     <div>
       <div className='w-screen h-screen justify-center items-center'>
-        <MDBRow className="g-0 bg-amber-100 position-relative">
+        <MDBRow className="g-0 bg-gradient-to-r from-indigo-500 position-relative">
           <MDBCol md="6" className="mb-md-0 p-md-4 mt-5">
             <img
               src={productDetails.image}
@@ -119,9 +147,14 @@ function ShowProduct() {
                 <br />
 
                 <div>
+                 <div className='flex d-flex justify-start items-center gap-2'>
                   <span role="img" aria-label="star">
                     ⭐️⭐️⭐️⭐️⭐️ (156+ user Ratings)
                   </span>
+                  <div onClick={() => handleWishlist(productDetails._id)}>
+                 <HeartIcon />
+                 </div>
+                 </div>
                   <hr />
                   <p>
                     {productDetails.description}

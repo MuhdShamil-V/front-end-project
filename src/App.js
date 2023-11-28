@@ -10,6 +10,7 @@ import Admin from './Components/Dealer/Admin';
 import Collections from './Components/User/Collections';
 import Cart from './Components/User/Cart';
 import ShowProduct from './Components/User/ShowProduct';
+import Wishlist from './Components/User/Wishlist';
 
 
 
@@ -29,6 +30,7 @@ function App() {
           {/* <Route path="/slider" element={<Slider />} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/showproduct/:id" element={<ShowProduct />} />
+          <Route path="/wishlist" element={<Wishlist />} />
         </Routes>
       </BrowserRouter>
     </Provider>

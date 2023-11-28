@@ -18,11 +18,11 @@ function Home() {
         <div className='flex flex-col justify-center items-center gap-4 ml-44'>
         <p className='home-qot'>Discover the Fragrance of Elegance</p>
         <p className='qot-cont'>Discover the beauty of fragrance<><br /></> with our collection of premium perfumes.<br /> Immerse yourself in the aroma of luxury and elevate your<br /> style</p>
-        <button className='bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded'>Shop Now</button>
+        <button className='bg-gradient-to-r from-blue-400 to-green-300 hover:from-blue-500 hover:to-green-400 p-2 rounded'>Shop Now</button>
         </div>
         </div>
     </div>
-    <div className='bg-orange-200'>
+    <div className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% ...'>
 
             <Slider />
     </div>
