@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserToken, selectUserid } from '../../redux/authSlice';
 import axios from 'axios';
+import { Card, Button, Row } from 'react-bootstrap';
 
 function Wishlist() {
   const userToken = useSelector(selectUserToken);
@@ -20,7 +21,7 @@ function Wishlist() {
       const { status, message, data } = response.data;
 
       if (status === 'success') {
-        const products = data.products || [];
+        const products = data.products[0].wishlist;
         console.log(products);
         setWishlist(products);
       } else {
@@ -38,13 +39,32 @@ function Wishlist() {
   return (
     <div>
       <h2>My Wishlist</h2>
-      <ul>
+      <Row xs={1} md={2} lg={3} xl={4} className="g-4">
         {wishlist.map((item) => (
-          <li key={item._id}>
-            {item.title} - {item.productPrice}
-          </li>
+          <Card
+            className="shadow p-3 mb-5 bg-body-tertiary rounded"
+            style={{ width: '18rem', height: '28rem' }}
+            key={item.Id}
+          >
+            <Card.Img variant="top" src={item.image} />
+            <Card.Body style={{ textAlign: 'center' }}>
+              <Card.Title>{item.title}</Card.Title>
+              <h6>Gender: {item.category}</h6>
+              <h6>Price: ₹ {item.price}</h6>
+
+              <Button variant="outline-primary">Buy Product</Button>
+
+              <Button
+                // onClick={() => remove(item.Id)} 
+                className="ms-3"
+                variant="outline-danger"
+              >
+                Remove
+              </Button>
+            </Card.Body>
+          </Card>
         ))}
-      </ul>
+      </Row>
     </div>
   );
 }
