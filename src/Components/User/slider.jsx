@@ -42,6 +42,8 @@ const Slider = () => {
   const products = useSelector(selectProducts);
   const [isEdit, setIsedit] = useState(false);
   const [updatedProductData, setUpdatedProductData] = useState(null);
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
   console.log("key",token)
 
   const dealerToken = token;
@@ -49,7 +51,7 @@ const Slider = () => {
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        "https://ecommerce-api.bridgeon.in/products?accessKey=7c63073252c8740d7951",
+        `https://ecommerce-api.bridgeon.in/products?accessKey=${accessKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

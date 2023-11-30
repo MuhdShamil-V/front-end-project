@@ -16,6 +16,8 @@ function ShowProduct() {
   const userId = useSelector(selectUserid);
   const userToken = useSelector(selectUserToken);
 
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
 
   useEffect(() => {
     getProductById(id, token, allProducts);
@@ -30,7 +32,7 @@ function ShowProduct() {
     } else {
       // If the product is not found in the Redux store, make an API call to get it
       try {
-        const response = await axios.get(`https://ecommerce-api.bridgeon.in/products/${id}?accessKey=7c63073252c8740d7951`, {
+        const response = await axios.get(`https://ecommerce-api.bridgeon.in/products/${id}?accessKey=${accessKey}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

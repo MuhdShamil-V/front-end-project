@@ -24,7 +24,7 @@ function Login() {
     const isAdmin = email === "shamil@mail.com";
     event.preventDefault();
    
-   const accessKey="7c63073252c8740d7951"
+   const accessKey=process.env.REACT_APP_ACCESS_KEY;
     if (isAdmin) {
       handleLogin(event);
     } else {

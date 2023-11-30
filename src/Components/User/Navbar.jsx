@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaSearch, FaRegHeart } from "react-icons/fa";
+import { AiOutlineLogin } from "react-icons/ai";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 import { useNavigate } from 'react-router-dom';
 import logo from '../logo.png';
@@ -20,6 +21,7 @@ function Navbar() {
             <button>Men</button>
         </div>
         <div className='flex gap-4 text-white font-thin'>
+            <button><AiOutlineLogin /></button>
             <button><FaSearch /></button>
             <button><HiMiniShoppingCart onClick={()=> navigate('/cart')} /></button>
             <button><FaRegHeart onClick={() => navigate('/wishlist')} /></button>
