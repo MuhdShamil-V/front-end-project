@@ -8,9 +8,11 @@ function UserList() {
   const [isdelete, setIsdelete] = useState([]);
   const token = useSelector(selectToken);
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://ecommerce-api.bridgeon.in/users', {
+      const response = await axios.get(`${baseUrl}/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -32,7 +34,7 @@ function UserList() {
 
   const deleteUser = async (userId, token) => {
     try {
-      const response = await axios.delete(`https://ecommerce-api.bridgeon.in/users/${userId}`, {
+      const response = await axios.delete(`${baseUrl}/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

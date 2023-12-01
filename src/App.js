@@ -11,6 +11,7 @@ import Collections from './Components/User/Collections';
 import Cart from './Components/User/Cart';
 import ShowProduct from './Components/User/ShowProduct';
 import Wishlist from './Components/User/Wishlist';
+import Slider from './Components/User/slider';
 
 
 
@@ -19,15 +20,16 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<UserRegister />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
           <Route path='/admin' element={<Admin/>} />
           <Route path="/admin/allproducts" element={<Admin />} />
           <Route path="/admin/addproducts" element={<Admin />} />
           <Route path="/registration" element={<UserRegister />} />
           <Route path="/admin/userslist" element={<Admin />} />
-          {/* <Route path="/slider" element={<Slider />} /> */}
+          <Route path="/collections" element={<Slider />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/showproduct/:id" element={<ShowProduct />} />
           <Route path="/wishlist" element={<Wishlist />} />

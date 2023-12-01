@@ -2,11 +2,15 @@ import React from 'react'
 import Navbar from './Navbar';
 import Slider from './slider';
 import img from '../bg.png';
+import { useSelector } from 'react-redux';
+import { selectUserName } from '../../redux/authSlice';
 
 function Home() {
+  const name=useSelector(selectUserName)
   return (
     <>
     <div className=' w-full  overflow-hidden flex flex-col justify-start items-start  bg-gradient-to-r from-indigo-300 from-10% via-sky-400 via-30% to-emerald-300 to-90% ...' style={{height: '550px'}}>
+   
         <div className='w-full h-auto flex flex-col'>
           <Navbar />
         </div>

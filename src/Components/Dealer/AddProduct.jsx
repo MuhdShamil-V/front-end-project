@@ -27,7 +27,7 @@ function Addproduct() {
     formData.append('img', image);
     try {
       const response = await axios.post(
-        `/products`,
+        `${baseUrl}/products`,
         formData,
         {
           headers: {

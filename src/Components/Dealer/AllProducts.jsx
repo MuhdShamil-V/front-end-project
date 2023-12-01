@@ -12,12 +12,16 @@ function GetAllproduct() {
   const [updatedProductData,setupdatedProductData]=useState(null)
 
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
+  console.log(accessKey);
+  console.log(baseUrl);
 
   const dealerToken = token;
 
   const getAllProducts = async (token) => {
     try {
-      const response = await axios.get(`https://ecommerce-api.bridgeon.in/products?accessKey=${accessKey}`, {
+      const response = await axios.get(`${baseUrl}/products?accessKey=${accessKey}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +47,7 @@ function GetAllproduct() {
   };
   const deleteProduct = async (productId, token) => {
     try {
-      const response = await axios.delete(`https://ecommerce-api.bridgeon.in/products/${productId}`, {
+      const response = await axios.delete(`${baseUrl}/products/${productId}`, {
         headers: {
           Authorization:` Bearer ${token}`,
         },
@@ -74,7 +78,7 @@ function GetAllproduct() {
   
   const handleUpdateProduct = async (productId,updatedProductData, token) => {
     try {
-      const response = await axios.patch(`https://ecommerce-api.bridgeon.in/products/${productId}`, updatedProductData, {
+      const response = await axios.patch(`${baseUrl}/products/${productId}`, updatedProductData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

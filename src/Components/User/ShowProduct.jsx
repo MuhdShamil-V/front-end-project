@@ -17,6 +17,7 @@ function ShowProduct() {
   const userToken = useSelector(selectUserToken);
 
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
   useEffect(() => {
@@ -32,7 +33,7 @@ function ShowProduct() {
     } else {
       // If the product is not found in the Redux store, make an API call to get it
       try {
-        const response = await axios.get(`https://ecommerce-api.bridgeon.in/products/${id}?accessKey=${accessKey}`, {
+        const response = await axios.get(`${baseUrl}/products/${id}?accessKey=${accessKey}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +60,7 @@ function ShowProduct() {
       console.log("User Token:", userToken);
   
       const response = await axios.post(
-        `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
+        `${baseUrl}/users/${userId}/cart/${productId}`,
         null, // Assuming no data payload, pass null if not needed
         {
           headers: {
@@ -88,7 +89,7 @@ function ShowProduct() {
       console.log("userID", userId);
       console.log("userToken", userToken);
 
-      const response = await axios.post(`https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`, null,
+      const response = await axios.post(`${baseUrl}/users/${userId}/wishlist/${productId}`, null,
       {
         headers: {
           Authorization: `Bearer ${userToken}`,

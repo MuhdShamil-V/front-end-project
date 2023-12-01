@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import '../Dealer/Login.css';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setToken, setUserToken ,setUserid} from "../../redux/authSlice";
+import { setIslogin, setToken, setUserToken ,setUserid, setUsername} from "../../redux/authSlice";
 
 
 function Login() {
@@ -14,17 +14,24 @@ function Login() {
 
 
   const [state, setState] = useState("");
-  const [name, setName] = useState("");
+  
   const dispatch = useDispatch();
   const navigation = useNavigate();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
   
   const tologin = (event) => {
     const email = event.target.email.value;
     const password=event.target.password.value;
+    
     const isAdmin = email === "shamil@mail.com";
+    const name=event.target.name.value;
+    console.log(name)
+    dispatch(setUsername(name))
     event.preventDefault();
    
-   const accessKey=process.env.REACT_APP_ACCESS_KEY;
+
+
     if (isAdmin) {
       handleLogin(event);
     } else {
@@ -36,22 +43,20 @@ function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
-    console.log(email);
     const password = event.target.password.value;
-    console.log(password);
   
     setState([...state, { email: email, password: password }]);
   
     try {
       const response = await axios.post(
-        "https://ecommerce-api.bridgeon.in/login",
+        `${baseUrl}/login`,
         {
           email,
           password,
         }
       );
       const { status, message, data } = response.data;
-      console.log(response.data, "guyjgjyhbj");
+      console.log(response.data);
       if (status === "success") {
         const token = data.token;
         console.log("Login successful. Token:", token);
@@ -71,7 +76,7 @@ function Login() {
   
 
     try {
-      const response = await axios.post('https://ecommerce-api.bridgeon.in/users/login', {
+      const response = await axios.post( `${baseUrl}/users/login`, {
         accessKey,
         email,
         password,
@@ -82,9 +87,10 @@ function Login() {
       if (status === 'success') {
         console.log(data)
         const token = data.token;
-        setName(data._id)
         dispatch(setUserToken(data.token))
         dispatch(setUserid(data.userId))
+        dispatch(setIslogin(true))
+
         console.log('Login successful. Token:', token);
         navigation('/')
       } else {
@@ -113,6 +119,7 @@ function Login() {
                 
               />
               <label>Email</label>
+              
               <div className="L-icon">
                 <BiSolidUser />
               </div>
@@ -132,10 +139,28 @@ function Login() {
                 <BiSolidLockAlt />
               </div>
             </div>
+            <div className="L-form-wrapper">
+            <input
+                type="text"
+                className="L-form-control"
+                id="name"
+                name="name" 
+                required
+                
+                
+              />
+              <label>name</label>
+              <div className="L-icon">
+                <BiSolidLockAlt />
+              </div>
+            </div>
 
             <button type="submit" className="L-button">
               Login
             </button>
+            <p style={{ textAlign: 'center', marginTop: '10px', color: 'white' }}>
+          Don't have an account? <Link to="/registration">Register here</Link>
+        </p>
           </form>
         </div>
       </div>

@@ -10,9 +10,11 @@ function Cart() {
   const userToken = useSelector(selectToken);
   const [cartItems, setCartItems] = useState([]);
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const viewCart = async (userId, token) => {
     try {
-      const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/cart`, {
+      const response = await axios.get(`${baseUrl}/users/${userId}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +43,7 @@ function Cart() {
   const deletePro = async (userId, productId, userToken) => {
     try {
       const response = await axios.delete(
-        `https://ecommerce-api.bridgeon.in/users/${userId}/cart/${productId}`,
+        `${baseUrl}/users/${userId}/cart/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

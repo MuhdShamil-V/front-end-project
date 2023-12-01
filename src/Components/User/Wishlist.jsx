@@ -8,11 +8,14 @@ function Wishlist() {
   const userToken = useSelector(selectUserToken);
   const userId = useSelector(selectUserid);
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+
+
   const [wishlist, setWishlist] = useState([]);
 
   const yourWishlist = async (userId, token) => {
     try {
-      const response = await axios.get(`https://ecommerce-api.bridgeon.in/users/${userId}/wishlist`, {
+      const response = await axios.get(`${baseUrl}/users/${userId}/wishlist`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,7 +46,7 @@ function Wishlist() {
   const deletePro = async (userId, productId, userToken) => {
     try {
       const response = await axios.delete(
-        `https://ecommerce-api.bridgeon.in/users/${userId}/wishlist/${productId}`,
+        `${baseUrl}/users/${userId}/wishlist/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,

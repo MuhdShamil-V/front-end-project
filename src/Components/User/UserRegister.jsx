@@ -5,7 +5,7 @@ import { setUserToken, setUserid } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { MdAlternateEmail } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 function Signup() {
@@ -14,10 +14,13 @@ function Signup() {
 
     const dispatch=useDispatch()
 
+    const baseUrl = process.env.REACT_APP_BASE_URL;
+    const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
   
     const registerUser = async (accessKey, username, email, password) => {
       try {
-        const response = await axios.post('https://ecommerce-api.bridgeon.in/users/register', {
+        const response = await axios.post(`${baseUrl}/users/register`, {
           accessKey,
           username,
           email,
@@ -48,8 +51,7 @@ function Signup() {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-
-    registerUser("7c63073252c8740d7951", username, email, password);
+    registerUser(`${accessKey}`, username, email, password);
 
   };
 
@@ -107,6 +109,10 @@ function Signup() {
             <button type="submit" className="R-button">
               Signup
             </button>
+            <p className='text-white'>
+              Aleady registered?
+              <Link to={"/login"}>Click Here</Link>
+            </p>
           </form>
         </div>
       </div>

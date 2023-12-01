@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Login from "../Components/Dealer/Login";
 
 
 export const authSlice = createSlice({
@@ -10,11 +11,17 @@ export const authSlice = createSlice({
     isSignIn: true,
     isCart: false,
     userId: localStorage.getItem('userId')|| null,
+    isLogin:localStorage.getItem('login')|| false,
+    userName:localStorage.getItem('userName')|| "",
   },
   reducers: {
     setToken: (state, action) => {
       state.token = action.payload;
       localStorage.setItem('token', action.payload);
+    },
+    setUsername: (state, action) => {
+      state.userName = action.payload;
+      localStorage.setItem('userName', action.payload);
     },
     setUserToken: (state, action) => {
       state.userToken = action.payload;
@@ -32,11 +39,27 @@ export const authSlice = createSlice({
     },
     setIscart: (state, action) => {
       state.isCart = action.payload;
-    }
+    },
+    clearUserToken: (state) => {
+      state.userToken = null;
+      localStorage.removeItem('userToken'); // Remove the user token from local storage
+    },
+    clearUsername: (state) => {
+      state.userName = "";
+      localStorage.removeItem('userName'); // Remove the user token from local storage
+    },
+    clearUserId: (state) => {
+      state.userId = null;
+      localStorage.removeItem('userId'); // Remove the user token from local storage
+    },
+    setIslogin: (state, action) => {
+      state.isLogin = action.payload;
+      localStorage.setItem('login',action.payload)
+    },
   },
 });
 
-export const { setToken, setUserToken, setProducts ,setSignIn, setUserid, setIScart} = authSlice.actions;
+export const { setToken, setUserToken, setProducts ,setSignIn,clearUsername,setUsername, setUserid, setIScart, clearUserToken, clearUserId, setIslogin} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -44,5 +67,7 @@ export const selectProducts = (state) => state.auth.products;
 export const selectUserid = (state) => state.auth.userId;
 export const selectSignin = (state) => state.auth.isSignIn;
 export const selectIscart = (state) => state.auth.isCart;
+export const selectIslogin = (state) => state.auth.isLogin;
+export const selectUserName = (state) => state.auth.userName;
 
 export default authSlice.reducer;
