@@ -35,7 +35,7 @@ function Navbar() {
         <div className='flex gap-4 text-black font-thin'>
             <button>About</button>
             <button>Contact</button>
-            <button>Collections</button>
+            <button onClick={()=> navigate('/collections')}>Collections</button>
             <button>Men</button>
            
         </div>
