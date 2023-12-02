@@ -56,6 +56,7 @@ export const authSlice = createSlice({
       state.isLogin = action.payload;
       localStorage.setItem('login',action.payload)
     },
+    
   },
 });
 

@@ -7,6 +7,8 @@ import { Card, Button, Row } from 'react-bootstrap';
 function Wishlist() {
   const userToken = useSelector(selectUserToken);
   const userId = useSelector(selectUserid);
+  console.log(userToken);
+  console.log(userId);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 

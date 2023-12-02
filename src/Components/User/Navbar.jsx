@@ -16,10 +16,10 @@ function Navbar() {
   console.log(isLogin)
   const dispatch = useDispatch();
   const logout=()=>{
-    dispatch(clearUserId)
-    dispatch(clearUserToken)
+    dispatch(clearUserId())
+    dispatch(clearUserToken())
     dispatch(setIslogin(false))
-    dispatch(clearUsername)
+    dispatch(clearUsername())
 
     console.log(isLogin)
     
@@ -37,6 +37,7 @@ function Navbar() {
             <button>Contact</button>
             <button>Collections</button>
             <button>Men</button>
+           
         </div>
         <div className='flex gap-4 text-white font-thin'>
 
@@ -49,12 +50,7 @@ function Navbar() {
             <button className='text-black'><FaUser   title={name}/></button>
             </div>
             :
-
-            <button className='text-black'><MdOutlineLogin onClick={()=> navigate('/login')}  title='login'/></button>
-
-
-
-
+          <button className='text-black'><MdOutlineLogin onClick={()=> navigate('/login')}  title='login'/></button>
           }
             <button className='text-black'><FaSearch /></button>
             <button className='text-black'><HiMiniShoppingCart onClick={()=> navigate('/cart')} /></button>

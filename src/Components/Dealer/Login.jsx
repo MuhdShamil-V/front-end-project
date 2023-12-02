@@ -92,7 +92,7 @@ function Login() {
         dispatch(setIslogin(true))
 
         console.log('Login successful. Token:', token);
-        navigation('/')
+        navigation('/home')
       } else {
         console.error('Login failed. Message:', message);
       }
