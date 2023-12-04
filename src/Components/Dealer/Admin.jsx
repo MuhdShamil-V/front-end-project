@@ -38,6 +38,7 @@ function Admin() {
       <div className="bg-sky-950 text-white w-1/6 border-r-8 border-emerald-200 h-full fixed top-0 left-0 overflow-x-hidden pt-20">
       <div className='ms-5'>
             <Avatar sx={{width: 150, height: 150}} src="/broken-image.jpg" />
+            <h3>Admin</h3>
             </div>
         <motion.ul variants={container} initial="hidden" animate="visible" className="list-none p-0 mt-20">
           <motion.li variants={item} className="mb-4">

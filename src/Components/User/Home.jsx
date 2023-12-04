@@ -8,9 +8,10 @@ import Categories from './Categories';
 
 function Home() {
   const name=useSelector(selectUserName)
+
   return (
     <>
-    <div className=' w-full  overflow-hidden flex flex-col justify-start items-start  bg-gradient-to-r from-indigo-300 from-10% via-sky-400 via-30% to-emerald-300 to-90% ...' style={{height: '550px'}}>
+    <div className=' w-full  overflow-hidden flex flex-col justify-start items-start bg-gradient-to-r from-gray-950 to-slate-600' style={{height: '550px'}}>
    
         <div className='w-full h-auto flex flex-col'>
           <Navbar />
@@ -27,7 +28,7 @@ function Home() {
         </div>
         </div>
     </div>
-    <div className='bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% '>
+    <div className=' bg-gradient-to-r from-gray-950 to-slate-600'>
 
             <Categories />
             {/* <Slider /> */}

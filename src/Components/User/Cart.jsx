@@ -1,15 +1,18 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BsCart4 } from 'react-icons/bs';
 import { Button, Table } from 'react-bootstrap';
-import { selectToken, selectUserid } from '../../redux/authSlice';
+import { selectIsLoading, selectToken, selectUserid, setIsLoading } from '../../redux/authSlice';
 import toast from 'react-hot-toast';
+import Loading from './Loading';
 
 function Cart() {
   const userId = useSelector(selectUserid);
   const userToken = useSelector(selectToken);
   const [cartItems, setCartItems] = useState([]);
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
 
@@ -24,6 +27,7 @@ function Cart() {
       if (status === 'success') {
         const products = data.products[0].cart.map((item) => ({ ...item, qty: 1 }));
         console.log('Cart items:', products);
+
         setCartItems(products);
       } else {
         console.error('Cart item retrieval failed. Message');
@@ -33,7 +37,12 @@ function Cart() {
     }
   };
 
+  setTimeout( ()=> {
+    dispatch(setIsLoading(false))
+  }, 4000)
   useEffect(() => {
+    dispatch(setIsLoading(true))
+
     viewCart(userId, userToken);
   }, []);
 
@@ -178,6 +187,9 @@ function Cart() {
           )}
         </div>
       </div>
+      {
+        isLoading && <Loading />
+      }
     </div>
   );
 }

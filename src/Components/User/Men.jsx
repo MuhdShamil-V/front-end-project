@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProducts, selectToken, setProducts } from '../../redux/authSlice';
+import { selectIsLoading, selectProducts, selectToken, setIsLoading, setProducts } from '../../redux/authSlice';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Carousel from "react-multi-carousel";
@@ -16,6 +16,7 @@ import {
     MDBCardTitle,
     MDBIcon,
   } from "mdb-react-ui-kit";
+import Loading from './Loading';
 
   
 const responsive = {
@@ -41,6 +42,7 @@ const Men = () => {
     const dispatch=useDispatch()
     const products = useSelector(selectProducts);
     const [updatedProductData, setUpdatedProductData] = useState(null);
+    const isLoading = useSelector(selectIsLoading)
   
     const accessKey = process.env.REACT_APP_ACCESS_KEY;
     const baseUrl = process.env.REACT_APP_BASE_URL;
@@ -62,8 +64,11 @@ const Men = () => {
         const { status, message, data } = response.data;
         if (status === "success") {
           // Successfully fetched products.
-          dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
           console.log("Fetched products:", data);
+          setTimeout( ()=> {
+            dispatch(setIsLoading(false))
+          }, 4000);
+          dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
         } else {
           console.error("Product retrieval failed. Message:", message);
         }
@@ -135,6 +140,9 @@ const Men = () => {
         ))}
       </Carousel>
     </div>
+    {
+      isLoading && <Loading />
+    }
                  </div>
   );
 };

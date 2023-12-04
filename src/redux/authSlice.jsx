@@ -13,6 +13,7 @@ export const authSlice = createSlice({
     userId: localStorage.getItem('userId')|| null,
     isLogin:localStorage.getItem('login')|| false,
     userName:localStorage.getItem('userName')|| "",
+    isLoading: true,
   },
   reducers: {
     setToken: (state, action) => {
@@ -56,11 +57,14 @@ export const authSlice = createSlice({
       state.isLogin = action.payload;
       localStorage.setItem('login',action.payload)
     },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
     
   },
 });
 
-export const { setToken, setUserToken, setProducts ,setSignIn,clearUsername,setUsername, setUserid, setIScart, clearUserToken, clearUserId, setIslogin} = authSlice.actions;
+export const { setToken, setUserToken, setProducts ,setSignIn,clearUsername,setUsername, setUserid, setIScart, clearUserToken, clearUserId, setIslogin, setIsLoading} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -70,5 +74,6 @@ export const selectSignin = (state) => state.auth.isSignIn;
 export const selectIscart = (state) => state.auth.isCart;
 export const selectIslogin = (state) => state.auth.isLogin;
 export const selectUserName = (state) => state.auth.userName;
+export const selectIsLoading = (state) => state.auth.isLoading;
 
 export default authSlice.reducer;

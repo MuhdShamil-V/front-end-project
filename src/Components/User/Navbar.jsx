@@ -46,11 +46,12 @@ function Navbar() {
         <div className='logo'>
           <img className='h-40' src={logo} />
         </div>
-        <div className='flex gap-4 text-black font-thin'>
-            <button>About</button>
-            <button>Contact</button>
-            <button onClick={()=> navigate('/collections')}>Collections</button>
-            <button>Men</button>
+        <div className='flex gap-4 font-thin'>
+            <button className='text-black hover:text-white'>About</button>
+            <button className='text-black hover:text-white'>Contact</button>
+            <button className='text-black hover:text-white' onClick={()=> navigate('/collections')}>Collections</button>
+            <button className='text-black hover:text-white' onClick={()=> navigate('/men')}>Men</button>
+            <button className='text-black hover:text-white' onClick={()=> navigate('/women')}>women</button>
            
         </div>
         <div className='flex gap-4 text-white font-thin'>
@@ -66,7 +67,7 @@ function Navbar() {
             :
           <button className='text-black'><MdOutlineLogin onClick={()=> navigate('/login')}  title='login'/></button>
           }
-            <button className='text-black'><FaSearch /></button>
+            <button className='text-black hover:text-white'><FaSearch /></button>
             <button className='text-black'><HiMiniShoppingCart onClick={()=> navigate('/cart')} /></button>
             <button className='text-black'><FaRegHeart onClick={()=> navigate('/wishlist')} /></button>
 
