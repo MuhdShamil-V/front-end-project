@@ -7,6 +7,8 @@ import logo from '../logo.png';
 import { clearUserId, clearUserToken, clearUsername, selectIslogin, selectUserName, setIslogin } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 
 function Navbar() {
@@ -15,17 +17,29 @@ function Navbar() {
   const name = useSelector(selectUserName);
   console.log(isLogin)
   const dispatch = useDispatch();
-  const logout=()=>{
-    dispatch(clearUserId())
-    dispatch(clearUserToken())
-    dispatch(setIslogin(false))
-    dispatch(clearUsername())
-
-    console.log(isLogin)
+  const logout = () => {
     
-    alert("logouted")
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        dispatch(clearUserId());
+        dispatch(clearUserToken());
+        dispatch(setIslogin(false));
+        dispatch(clearUsername());
 
-  }
+       
+        toast.success('Logged Out');
+      }
+    });
+  };
   const navigate = useNavigate();
   return (
     <div className='main-bar'>

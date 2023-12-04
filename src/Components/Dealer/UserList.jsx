@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/authSlice';
+import toast from 'react-hot-toast';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -41,14 +42,14 @@ function UserList() {
       });
       const { status, message } = response.data;
       if (status === 'success') {
-        console.log('User deleted.');
+        toast.success('User deleted.');
         setIsdelete([...isdelete, 'User deleted.']);
         fetchUsers();
       } else {
-        console.error('User deletion failed. Message:', message);
+        toast.success('User deletion failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
     }
   };
 

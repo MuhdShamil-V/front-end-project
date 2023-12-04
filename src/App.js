@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'; 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Components/Dealer/Login';
@@ -13,6 +13,8 @@ import Wishlist from './Components/User/Wishlist';
 import Slider from './Components/User/slider';
 import Men from './Components/User/Men';
 import Women from './Components/User/Women';
+import UniSex from './Components/User/UniSex';
+import toast,{ Toaster } from 'react-hot-toast';
 
 
 
@@ -20,6 +22,8 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
+      <Toaster position='bottom-center' />
+
         <Routes>
           <Route path="/" element={<UserRegister />} />
           <Route path="/login" element={<Login />} />
@@ -27,7 +31,6 @@ function App() {
           <Route path='/admin' element={<Admin/>} />
           <Route path="/admin/allproducts" element={<Admin />} />
           <Route path="/admin/addproducts" element={<Admin />} />
-          <Route path="/registration" element={<UserRegister />} />
           <Route path="/admin/userslist" element={<Admin />} />
           <Route path="/collections" element={<Slider />} />
           <Route path="/cart" element={<Cart />} />
@@ -35,6 +38,7 @@ function App() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
+          <Route path="/unisex" element={<UniSex />} />
         </Routes>
       </BrowserRouter>
     </Provider>

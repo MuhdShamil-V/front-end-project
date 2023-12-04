@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIslogin, setToken, setUserToken ,setUserid, setUsername} from "../../redux/authSlice";
+import toast from "react-hot-toast";
 
 
 function Login() {
@@ -59,14 +60,14 @@ function Login() {
       console.log(response.data);
       if (status === "success") {
         const token = data.token;
-        console.log("Login successful. Token:", token);
+        toast.success("Admin logged in successfully")
         dispatch(setToken(token)); 
         navigation("/admin");
       } else {
-        console.error("Login failed. Message:", message);
+        toast.error("Admin already logged")
       }
     } catch (error) {
-      console.error("Error:", error.message);
+      toast.error("Error:Network Error");
     }
   }
     
@@ -91,13 +92,14 @@ function Login() {
         dispatch(setUserid(data.userId))
         dispatch(setIslogin(true))
 
-        console.log('Login successful. Token:', token);
+        // console.log('Login successful. Token:', token);
+        toast.success("User logged in")
         navigation('/home')
       } else {
-        console.error('Login failed. Message:', message);
+        toast.error('Login failed.');
       }
     } catch (error) {
-      console.error(`token${accessKey}`, error.message);
+      toast.error("Network Error")
     }
   };
 
@@ -159,7 +161,7 @@ function Login() {
               Login
             </button>
             <p style={{ textAlign: 'center', marginTop: '10px', color: 'white' }}>
-          Don't have an account? <Link to="/registration">Register here</Link>
+          Don't have an account? <Link to="/">Register here</Link>
         </p>
           </form>
         </div>

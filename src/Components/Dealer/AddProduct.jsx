@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/authSlice';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 
@@ -39,17 +40,17 @@ function Addproduct() {
 
       const { status, message, data } = response.data;
       if (status === 'success') {
-        console.log('Product added. Product details:', data);
+        toast.success('Product added Successfully');
         setTitle('');
         setCategory('');
         setDescription('');
         setPrice('');
         setImage(null);
       } else {
-        console.error('Product addition failed. Message:', message);
+        toast.error('Product addition failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('NetWork Error');
     }
   };
 

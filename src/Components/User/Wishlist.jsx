@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectUserToken, selectUserid } from '../../redux/authSlice';
 import axios from 'axios';
 import { Card, Button, Row } from 'react-bootstrap';
+import toast from 'react-hot-toast';
 
 function Wishlist() {
   const userToken = useSelector(selectUserToken);
@@ -57,13 +58,13 @@ function Wishlist() {
       );
       const { status, message } = response.data;
       if (status === 'success') {
-        console.log('Product removed from wishlist.');
+        toast.success('Product removed from wishlist.');
         yourWishlist(userId, userToken);
       } else {
-        console.error('Product removal from wishlist failed. Message:', message);
+        toast.error('Product removal from wishlist failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
     }
   };
 

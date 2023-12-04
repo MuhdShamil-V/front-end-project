@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { BsCart4 } from 'react-icons/bs';
 import { Button, Table } from 'react-bootstrap';
 import { selectToken, selectUserid } from '../../redux/authSlice';
+import toast from 'react-hot-toast';
 
 function Cart() {
   const userId = useSelector(selectUserid);
@@ -25,10 +26,10 @@ function Cart() {
         console.log('Cart items:', products);
         setCartItems(products);
       } else {
-        console.error('Cart item retrieval failed. Message:', message);
+        console.error('Cart item retrieval failed. Message');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      console.error('Error');
     }
   };
 
@@ -52,13 +53,13 @@ function Cart() {
       );
       const { status, message } = response.data;
       if (status === 'success') {
-        console.log('Product removed from cart.');
+        toast.success('Product removed from cart.');
         viewCart(userId, userToken);
       } else {
-        console.error('Product removal from cart failed. Message:', message);
+        toast.error('Product removal from cart failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
     }
   };
 

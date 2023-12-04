@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProducts, selectToken, setProducts as setProductsAction } from '../../redux/authSlice'; // Rename setProducts to setProductsAction
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 function GetAllproduct() {
   const token = useSelector(selectToken);
@@ -54,19 +56,33 @@ function GetAllproduct() {
       });
       const { status, message } = response.data;
       if (status === 'success') {
-        console.log('Product deleted.');
+          toast.success('Product deleted.');
         
         getAllProducts(token);
       } else {
-        console.error('Product deletion failed. Message:', message);
+        toast.error('Product deletion failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
     }
   };
   const handleDelete = (productId) => {
-    deleteProduct(productId, dealerToken)
+    
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(productId, dealerToken);
+      }
+    });
   };
+  
   const handleEdit = (productId) => {
     const productToEdit = products.find((product) => product._id === productId);
     console.log(productToEdit);
@@ -85,16 +101,15 @@ function GetAllproduct() {
       });
       const { status, message, data } = response.data;
       if (status === 'success') {
-        console.log('Updated product details:', data);
         
         getAllProducts(token);
         setIsedit(false); 
-        alert(`succussfully updated  ${updatedProductData.title}`)
+        toast.success(`succussfully updated  ${updatedProductData.title}`)
       } else {
-        console.error('Product update failed. Message:', message);
+        toast.error('Product updation failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('NetWork Error');
       
       setIsedit(false)
     }

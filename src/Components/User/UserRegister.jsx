@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { MdAlternateEmail } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 function Signup() {
@@ -33,13 +34,13 @@ function Signup() {
           dispatch(setUserid(data.userId))
 
           navigate('/login')
-          console.log('Registration successful. Token:', data.token);
+          toast.success('Registration successful.');
         } else {
-          console.error('Registration failed. Message:', message);
+          toast.error('Registration failed.');
         }
   
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
      
       
     }

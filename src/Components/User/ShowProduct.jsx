@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectToken, selectProducts, selectUserToken, selectUserid,  } from '../../redux/authSlice';
 import { MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import HeartIcon from './HeartIcon';
+import toast from 'react-hot-toast';
 
 
 function ShowProduct() {
@@ -72,13 +73,12 @@ function ShowProduct() {
   // Log the response from the server
   
       if (response.data.status === 'success') {
-        console.log('Product added to cart.');
-        alert.success("product added to cart  succussfully")
+        toast.success("product added to cart  succussfully")
       } else {
-        console.error('Product addition to cart failed. Message:', response.data.message);
+        toast.error('Product addition to cart failed.');
       }
     } catch (error) {
-      console.error('Error:', error.message);
+      toast.error('Network Error');
     }
   };
 
@@ -98,12 +98,12 @@ function ShowProduct() {
 
       if (response.data.status === "success") {
         console.log("product added to wishlist");
-        alert.success("product added to wishlist successfully")
+        toast.success("product added to wishlist successfully")
       } else {
-        console.log('product addition to wishlist failed. message:', response.data.message)
+        toast.error('product addition to wishlist failed.')
       }
     } catch(error) {
-      console.error('Error', error.message);
+      toast.error('Network Error');
     }
   };
 
