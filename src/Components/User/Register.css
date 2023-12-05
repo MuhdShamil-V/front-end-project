@@ -77,7 +77,7 @@
   .R-form-wrapper input:focus~label,
   .R-form-wrapper input:valid~label,
   .R-form-wrapper input:valid~label {
-    top: -5px;
+    top: 2px;
     color: aqua;
 
   }

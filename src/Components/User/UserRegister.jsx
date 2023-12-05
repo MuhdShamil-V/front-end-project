@@ -7,23 +7,31 @@ import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { MdAlternateEmail } from "react-icons/md";
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useFormik } from 'formik';
+import { SignupValidation } from './SignupValidation';
 
+
+const initialValues = {
+  username: '',
+  email: '',
+  password: ''
+}
 
 function Signup() {
-
-  const navigate = useNavigate();
-
-    const dispatch=useDispatch()
-
-    const baseUrl = process.env.REACT_APP_BASE_URL;
-    const accessKey = process.env.REACT_APP_ACCESS_KEY;
-
   
-    const registerUser = async (accessKey, username, email, password) => {
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+
+  const {values, handleBlur, handleChange, handleSubmit, errors} = useFormik({
+    initialValues: initialValues,
+    validationSchema: SignupValidation,
+    onSubmit: async (values) => {
+      console.log(values);
+      const {name, email, password} = values;
       try {
         const response = await axios.post(`${baseUrl}/users/register`, {
           accessKey,
-          username,
+          username: name,
           email,
           password,
         });
@@ -44,17 +52,16 @@ function Signup() {
      
       
     }
-  };
+    }
+  })
 
-  const handleRegistration = (event) => {
-    event.preventDefault()
-    const username = event.target.username.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
+  const navigate = useNavigate();
 
-    registerUser(`${accessKey}`, username, email, password);
+    const dispatch=useDispatch()
 
-  };
+
+
+
 
 
   return (
@@ -62,10 +69,15 @@ function Signup() {
       <div className="R-wrapper">
         <div className="R-inner signup">
           <form 
-          onSubmit={handleRegistration}>
+          // onSubmit={handleRegistration}
+          onSubmit={handleSubmit}>
+
             <h2>Registration</h2>
             <div className="R-form-wrapper">
               <input
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.name}
                 type="text"
                 className="R-form-control"
                 name="username"
@@ -74,12 +86,16 @@ function Signup() {
                 
               />
               <label>Username</label>
+              {errors.username && <small className='text-red-600'>{errors.username}</small>}
               <div className="R-icon">
                 <BiSolidUser />
               </div>
             </div>
             <div className="R-form-wrapper">
               <input
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.email}
                 type="email"
                 className="R-form-control"
                 name="email"
@@ -88,12 +104,17 @@ function Signup() {
                 
               />
               <label>Email</label>
+              {errors.email && <small className='text-red-600'>{errors.email}</small>}
+
               <div className="R-icon">
               <MdAlternateEmail />
               </div>
             </div>
             <div className="R-form-wrapper">
               <input
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.password}
                 type="password"
                 className="R-form-control"
                 name="password"
@@ -102,6 +123,7 @@ function Signup() {
                 
               />
               <label>Password</label>
+              {errors.password && <small className='text-red-600'>{errors.password}</small>}
               <div className="R-icon">
                 <BiSolidLockAlt />
               </div>
