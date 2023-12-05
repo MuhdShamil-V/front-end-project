@@ -12,30 +12,36 @@ import { SignupValidation } from './SignupValidation';
 
 
 const initialValues = {
-  username: '',
+  name: '',
   email: '',
   password: ''
 }
 
+
 function Signup() {
   
-  const baseUrl = process.env.REACT_APP_BASE_URL;
-  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-  const {values, handleBlur, handleChange, handleSubmit, errors} = useFormik({
+  
+    const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
     initialValues: initialValues,
     validationSchema: SignupValidation,
     onSubmit: async (values) => {
       console.log(values);
-      const {name, email, password} = values;
+      const { name, email, password } = values;
+  
+      const accessKey = process.env.REACT_APP_ACCESS_KEY;
+      const baseUrl = process.env.REACT_APP_BASE_URL;
+  
       try {
         const response = await axios.post(`${baseUrl}/users/register`, {
           accessKey,
-          username: name,
+          username:name,
           email,
           password,
         });
-        const { status, message, data } = response.data;
+        const { status, data } = response.data;
         if (status === 'success') {
           console.log("id",data.userId)
           dispatch(setUserToken(data.token))
@@ -47,22 +53,11 @@ function Signup() {
           toast.error('Registration failed.');
         }
   
-    } catch (error) {
-      toast.error('Network Error');
-     
-      
+      } catch (error) {
+        toast.error('Network Error');
+      }
     }
-    }
-  })
-
-  const navigate = useNavigate();
-
-    const dispatch=useDispatch()
-
-
-
-
-
+  });
 
   return (
     <div className="register-window">
@@ -74,19 +69,18 @@ function Signup() {
 
             <h2>Registration</h2>
             <div className="R-form-wrapper">
-              <input
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.name}
-                type="text"
-                className="R-form-control"
-                name="username"
-                id="username"
-                required
-                
-              />
+            <input
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.username}  // Update to use "username" instead of "name"
+              type="text"
+              className="R-form-control"
+              name="name"
+              id="name"
+              required
+            />
               <label>Username</label>
-              {errors.username && <small className='text-red-600'>{errors.username}</small>}
+              {errors.name && <small className='text-red-600'>{errors.name}</small>}
               <div className="R-icon">
                 <BiSolidUser />
               </div>
