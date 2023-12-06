@@ -94,11 +94,11 @@ function Navbar() {
           <img className='h-40' src={logo} />
         </div>
         <div className='flex gap-4 font-thin'>
-            <button className='text-black hover:text-white '>About</button>
-            <button className='text-black hover:text-white'>Contact</button>
-            <button className='text-black hover:text-white' onClick={()=> navigate('/collections')}>Collections</button>
-            <button className='text-black hover:text-white' onClick={()=> navigate('/men')}>Men</button>
-            <button className='text-black hover:text-white' onClick={()=> navigate('/women')}>women</button>
+            <button className='text-gray-950 hover:text-white'>About</button>
+            <button className='text-gray-950 hover:text-white'>Contact</button>
+            <button className='text-gray-950 hover:text-white' onClick={()=> navigate('/collections')}>Collections</button>
+            <button className='text-gray-950 hover:text-white' onClick={()=> navigate('/men')}>Men</button>
+            <button className='text-gray-950 hover:text-white' onClick={()=> navigate('/women')}>women</button>
            
         </div>
         <div className='flex gap-4 text-white font-thin'>
@@ -114,9 +114,9 @@ function Navbar() {
             :
           <button className='text-black'><MdOutlineLogin onClick={()=> navigate('/login')}  title='login'/></button>
           }
-            <button className='text-black hover:text-white'><FaSearch onClick={()=>setIsSearch(true)}/></button>
-            <button className='text-black'><HiMiniShoppingCart onClick={()=> navigate('/cart')} /></button>
-            <button className='text-black'><FaRegHeart onClick={()=> navigate('/wishlist')} /></button>
+            <button className='text-gray-950 hover:text-white'><FaSearch onClick={()=>setIsSearch(true)}/></button>
+            <button className='text-gray-950 hover:text-white'><HiMiniShoppingCart onClick={()=> navigate('/cart')} /></button>
+            <button className='text-gray-950 hover:text-white'><FaRegHeart onClick={()=> navigate('/wishlist')} /></button>
 
         </div>
         {isSearch && (
@@ -128,18 +128,18 @@ function Navbar() {
           <div className="p-8  flex flex-col  justify-center items-center gap-2 w-1/2 rounded-xl">
             <input
               type="text"
-              className="bg-stone-300 text-blue-950 w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md"
+              className="bg-stone-500 text-black w-3/4 h-14 rounded-3xl pl-4 overflow-hidden shadow-md"
               style={{ opacity: 1, y: 0 }}
               onChange={handleSearch}
             />
-            <div className="bg-orange-400 opacity-75 h-auto w-3/4 rounded-lg">
+            <div className="bg-black opacity-60 h-auto w-3/4 rounded-lg">
               <ul >
              
   {searchdata.length>0?
  (   searchdata.map((value,index)=>{
       return(
 
-      <p key={index} className=' font-mono rounded-lg ' onDoubleClick={()=>nav(`/viewproduct/${value._id}`)} >
+      <p key={index} className=' font-mono rounded-lg text-gray-300' onDoubleClick={()=>nav(`/viewproduct/${value._id}`)} >
         {index+1}:
 {value.title}
       </p>

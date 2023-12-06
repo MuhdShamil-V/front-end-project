@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from './Navbar';
-import Slider from './slider';
 import img from '../bg.png';
 import { useSelector } from 'react-redux';
 import { selectUserName } from '../../redux/authSlice';
 import Categories from './Categories';
+import Footer from '../User/Footer';
 
 function Home() {
   const name=useSelector(selectUserName)
@@ -31,7 +31,9 @@ function Home() {
     <div className=' bg-gradient-to-r from-gray-950 to-slate-600'>
 
             <Categories />
-            {/* <Slider /> */}
+    </div>
+    <div>
+      <Footer />
     </div>
     
     </>
