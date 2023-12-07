@@ -14,7 +14,8 @@ import Slider from './Components/User/slider';
 import Men from './Components/User/Men';
 import Women from './Components/User/Women';
 import UniSex from './Components/User/UniSex';
-import toast,{ Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import Categories from './Components/User/Categories';
 
 
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/men" element={<Men />} />
           <Route path="/women" element={<Women />} />
           <Route path="/unisex" element={<UniSex />} />
+          <Route path="/categories" element={<Categories />} />       
         </Routes>
       </BrowserRouter>
     </Provider>

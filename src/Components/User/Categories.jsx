@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default function Categories() {
   return (
-    <div className='flex d-flex justify-center'>
+    <div className='flex d-flex justify-center h-screen bg-gradient-to-r from-gray-950 to-slate-600'>
       <MDBRow className='row-cols-1 row-cols-md-3 g-1 pt-5 pb-5 ms-5 flex '>
         <Link to='/men'>
           <MDBCol className='mx-8'>
@@ -15,7 +15,7 @@ export default function Categories() {
               <MDBCardImage className='hover:opacity-30' style={{ height: '400px' }} src={Men} alt='...' position='top' />
               <div className='category-name absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-serif font-bold'>
                   Men
-                </div>
+              </div>
             </MDBCard>
           </MDBCol>
         </Link>

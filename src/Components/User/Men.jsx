@@ -83,10 +83,10 @@ const Men = () => {
   const menProducts = products.filter((product) => product.category === 'Men');
 
   return (
-    <div className=' w-full h-screen'>
+    <div className=' w-full h-screen bg-gradient-to-r from-black to-white'>
 
     <div className='h-auto w-full'>
-      <h1>Men's Collection</h1>
+      <h1 className='text-white font-serif'>Men's Collection</h1>
       <Carousel
         responsive={responsive}
         autoPlay={true}

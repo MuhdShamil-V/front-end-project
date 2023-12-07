@@ -11,7 +11,7 @@ function Home() {
 
   return (
     <>
-    <div className=' w-full  overflow-hidden flex flex-col justify-start items-start bg-gradient-to-r from-gray-950 to-slate-600' style={{height: '550px'}}>
+    <div className=' w-full h-screen  overflow-hidden flex flex-col justify-start items-start bg-gradient-to-r from-gray-950 to-slate-600'>
    
         <div className='w-full h-auto flex flex-col'>
           <Navbar />

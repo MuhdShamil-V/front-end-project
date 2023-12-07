@@ -7,17 +7,13 @@ import {
   MDBCol,
   MDBIcon,
 } from "mdb-react-ui-kit";
-import logo from '../logo.png'
-
-
-
 
 
 const  Footer=()=>{
 
   return (
     <div className="w-full" >
-       <MDBFooter className='text-center text-lg-start text-white bg-gradient-to-r from-gray-950 to-slate-600'>
+       <MDBFooter className='text-center text-lg-start text-white bg-gray-900'>
        <section className='d-flex justify-content-center justify-content-center items-center p-4'>
 
        <CDBContainer className="d-flex justify-content-center " style={{gap:'10px  '}} > 
