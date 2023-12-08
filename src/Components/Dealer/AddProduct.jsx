@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/authSlice';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import toast from 'react-hot-toast';
 
 
@@ -13,8 +13,6 @@ function Addproduct() {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [image, setImage] = useState(null); 
-
-  const baseUrl = process.env.REACT_APP_BASE_URL;
   
 
   const handleFormSubmit = async (event) => {
@@ -28,7 +26,7 @@ function Addproduct() {
     formData.append('img', image);
     try {
       const response = await axios.post(
-        `${baseUrl}/products`,
+        '/products',
         formData,
         {
           headers: {

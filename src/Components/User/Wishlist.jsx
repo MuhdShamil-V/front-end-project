@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectUserToken, selectUserid } from '../../redux/authSlice';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import { Card, Button, Row } from 'react-bootstrap';
 import toast from 'react-hot-toast';
 
@@ -11,14 +11,12 @@ function Wishlist() {
   console.log(userToken);
   console.log(userId);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
-
 
   const [wishlist, setWishlist] = useState([]);
 
   const yourWishlist = async (userId, token) => {
     try {
-      const response = await axios.get(`${baseUrl}/users/${userId}/wishlist`, {
+      const response = await axios.get(`/users/${userId}/wishlist`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,7 +47,7 @@ function Wishlist() {
   const deletePro = async (userId, productId, userToken) => {
     try {
       const response = await axios.delete(
-        `${baseUrl}/users/${userId}/wishlist/${productId}`,
+        `/users/${userId}/wishlist/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -69,8 +67,8 @@ function Wishlist() {
   };
 
   return (
-    <div className='w-full h-screen pt-4 overflow-x-hidden overflow-y-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
-      <h2>Your Wishlist</h2>
+    <div className='w-full h-screen pt-4 overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-950 to-slate-500'>
+      <h2 className='font-serif'>Your Wishlist</h2>
       <div className='w-full' >
       <Row xs={1} md={2} lg={3} xl={4} className="gap-4 p-4 flex flex-wrap justify-center ">
         {wishlist.map((item) => (

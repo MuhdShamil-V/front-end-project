@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../AxiosInstance/instance";
 import {
   MDBContainer,
   MDBRow,
@@ -12,7 +12,6 @@ import {
   MDBCardBody,
   MDBCardImage,
   MDBCardTitle,
-  MDBIcon,
 } from "mdb-react-ui-kit";
 import { selectProducts, selectToken, setProducts } from "../../redux/authSlice";
 import '../User/slider.css'
@@ -44,7 +43,6 @@ const Slider = () => {
   const [updatedProductData, setUpdatedProductData] = useState(null);
 
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   console.log("key",token)
 
@@ -53,7 +51,7 @@ const Slider = () => {
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/products?accessKey=${accessKey}`,
+        `/products?accessKey=${accessKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

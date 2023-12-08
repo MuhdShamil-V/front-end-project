@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoading, selectProducts, selectToken, setIsLoading, setProducts } from '../../redux/authSlice';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import Carousel from "react-multi-carousel";
 import '../User/slider.css'
 import "react-multi-carousel/lib/styles.css";
@@ -14,7 +14,6 @@ import {
     MDBCardBody,
     MDBCardImage,
     MDBCardTitle,
-    MDBIcon,
   } from "mdb-react-ui-kit";
 import Loading from './Loading';
 
@@ -45,7 +44,6 @@ const Men = () => {
     const isLoading = useSelector(selectIsLoading)
   
     const accessKey = process.env.REACT_APP_ACCESS_KEY;
-    const baseUrl = process.env.REACT_APP_BASE_URL;
   
     console.log("key",token)
   
@@ -54,7 +52,7 @@ const Men = () => {
     const getAllProducts = async (token) => {
       try {
         const response = await axios.get(
-          `${baseUrl}/products?accessKey=${accessKey}`,
+          `/products?accessKey=${accessKey}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

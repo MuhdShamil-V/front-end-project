@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '../../redux/authSlice';
@@ -9,11 +9,10 @@ function UserList() {
   const [isdelete, setIsdelete] = useState([]);
   const token = useSelector(selectToken);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(`${baseUrl}/users`, {
+      const response = await axios.get('/users', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,7 +34,7 @@ function UserList() {
 
   const deleteUser = async (userId, token) => {
     try {
-      const response = await axios.delete(`${baseUrl}/users/${userId}`, {
+      const response = await axios.delete(`/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

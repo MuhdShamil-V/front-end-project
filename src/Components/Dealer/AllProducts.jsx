@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProducts, selectToken, setProducts as setProductsAction } from '../../redux/authSlice'; // Rename setProducts to setProductsAction
 import toast from 'react-hot-toast';
@@ -14,16 +14,14 @@ function GetAllproduct() {
   const [updatedProductData,setupdatedProductData]=useState(null)
 
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   console.log(accessKey);
-  console.log(baseUrl);
 
   const dealerToken = token;
 
   const getAllProducts = async (token) => {
     try {
-      const response = await axios.get(`${baseUrl}/products?accessKey=${accessKey}`, {
+      const response = await axios.get(`/products?accessKey=${accessKey}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -49,7 +47,7 @@ function GetAllproduct() {
   };
   const deleteProduct = async (productId, token) => {
     try {
-      const response = await axios.delete(`${baseUrl}/products/${productId}`, {
+      const response = await axios.delete(`/products/${productId}`, {
         headers: {
           Authorization:` Bearer ${token}`,
         },
@@ -94,7 +92,7 @@ function GetAllproduct() {
   
   const handleUpdateProduct = async (productId,updatedProductData, token) => {
     try {
-      const response = await axios.patch(`${baseUrl}/products/${productId}`, updatedProductData, {
+      const response = await axios.patch(`/products/${productId}`, updatedProductData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

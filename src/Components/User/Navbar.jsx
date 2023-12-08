@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import { Modal } from '@mui/material';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 
 function Navbar() {
   const [isSearch,setIsSearch]=useState(false)
@@ -35,9 +35,8 @@ function Navbar() {
   };
 
   const accessKey=process.env.REACT_APP_ACCESS_KEY;
-  const baseUrl = process.env.REACT_APP_BASE_URL;
+
   const logout = () =>  {
-     
 
     Swal.fire({
       title: 'Are you sure?',
@@ -66,7 +65,7 @@ function Navbar() {
   const getAllProducts = async (token) => {
     try {
       const response = await axios.get(
-        `${baseUrl}/products?accessKey=${accessKey}`,
+        `/products?accessKey=${accessKey}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -139,7 +138,7 @@ function Navbar() {
  (   searchdata.map((value,index)=>{
       return(
 
-      <p key={index} className=' font-mono rounded-lg text-gray-300' onDoubleClick={()=>nav(`/viewproduct/${value._id}`)} >
+      <p key={index} className=' font-mono rounded-lg text-gray-300' onDoubleClick={()=>nav(`/showproduct/${value._id}`)} >
         {index+1}:
 {value.title}
       </p>

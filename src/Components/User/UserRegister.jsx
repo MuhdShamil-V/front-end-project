@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import '../User/Register.css';
 import { setUserToken, setUserid } from '../../redux/authSlice';
 import { useDispatch } from 'react-redux';
@@ -32,10 +32,9 @@ function Signup() {
       const { name, email, password } = values;
   
       const accessKey = process.env.REACT_APP_ACCESS_KEY;
-      const baseUrl = process.env.REACT_APP_BASE_URL;
   
       try {
-        const response = await axios.post(`${baseUrl}/users/register`, {
+        const response = await axios.post('/users/register', {
           accessKey,
           username:name,
           email,

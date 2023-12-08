@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from '../AxiosInstance/instance';
 import '../Dealer/Login.css';
 import { Link, useNavigate } from "react-router-dom";
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
@@ -33,7 +33,6 @@ function Login() {
   
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const baseUrl = process.env.REACT_APP_BASE_URL;
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
   
   const tologin = (values) => {
@@ -61,7 +60,7 @@ function Login() {
   
     try {
       const response = await axios.post(
-        `${baseUrl}/login`,
+        '/login',
         {
           email,
           password,
@@ -88,7 +87,7 @@ function Login() {
   
 
     try {
-      const response = await axios.post( `${baseUrl}/users/login`, {
+      const response = await axios.post( '/users/login', {
         accessKey,
         email,
         password,

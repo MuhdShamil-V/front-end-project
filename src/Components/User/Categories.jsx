@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 export default function Categories() {
   return (
-    <div className='flex d-flex justify-center h-screen bg-gradient-to-r from-gray-950 to-slate-600'>
-      <MDBRow className='row-cols-1 row-cols-md-3 g-1 pt-5 pb-5 ms-5 flex '>
+    <div className='flex d-flex justify-center h-screen bg-gradient-to-r from-gray-950 to-slate-600 pt-5'>
+      <MDBRow className='row-cols-1 row-cols-md-3 g-1 pt-5 pb-5 ms-5 flex mt-5'>
         <Link to='/men'>
           <MDBCol className='mx-8'>
             <MDBCard className='h-100 category_card  bg-black' style={{ width: '300px' }}>

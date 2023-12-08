@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectToken, selectProducts, selectUserToken, selectUserid,  } from '../../redux/authSlice';
@@ -18,8 +18,6 @@ function ShowProduct() {
   const userToken = useSelector(selectUserToken);
 
   const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const baseUrl = process.env.REACT_APP_BASE_URL;
-
 
   useEffect(() => {
     getProductById(id, token, allProducts);
@@ -34,7 +32,7 @@ function ShowProduct() {
     } else {
       // If the product is not found in the Redux store, make an API call to get it
       try {
-        const response = await axios.get(`${baseUrl}/products/${id}?accessKey=${accessKey}`, {
+        const response = await axios.get(`/products/${id}?accessKey=${accessKey}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -61,7 +59,7 @@ function ShowProduct() {
       console.log("User Token:", userToken);
   
       const response = await axios.post(
-        `${baseUrl}/users/${userId}/cart/${productId}`,
+        `/users/${userId}/cart/${productId}`,
         null, // Assuming no data payload, pass null if not needed
         {
           headers: {
@@ -89,7 +87,7 @@ function ShowProduct() {
       console.log("userID", userId);
       console.log("userToken", userToken);
 
-      const response = await axios.post(`${baseUrl}/users/${userId}/wishlist/${productId}`, null,
+      const response = await axios.post(`/users/${userId}/wishlist/${productId}`, null,
       {
         headers: {
           Authorization: `Bearer ${userToken}`,
@@ -109,13 +107,14 @@ function ShowProduct() {
 
 
   return (
-    <div>
+    <div className='w-full h-screen bg-white'>
       <div className='w-screen h-screen justify-center items-center'>
-        <MDBRow className="g-0 bg-gradient-to-r from-indigo-500 position-relative">
-          <MDBCol md="6" className="mb-md-0 p-md-4 mt-5">
+        <MDBRow className="g-0 position-relative">
+          <MDBCol md="4" className="mb-md-0 p-md-4 mt-5">
             <img
               src={productDetails.image}
               className="img-fluid"
+              style={{height: '20rem', width: '18rem'}}
               alt="okdaa"
             />
           </MDBCol>

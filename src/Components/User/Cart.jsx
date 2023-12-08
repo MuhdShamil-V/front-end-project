@@ -1,7 +1,6 @@
-import axios from 'axios';
+import axios from '../AxiosInstance/instance';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BsCart4 } from 'react-icons/bs';
 import { Button, Table } from 'react-bootstrap';
 import { selectIsLoading, selectToken, selectUserid, setIsLoading } from '../../redux/authSlice';
 import toast from 'react-hot-toast';
@@ -14,11 +13,10 @@ function Cart() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
-  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const viewCart = async (userId, token) => {
     try {
-      const response = await axios.get(`${baseUrl}/users/${userId}/cart`, {
+      const response = await axios.get(`/users/${userId}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -53,7 +51,7 @@ function Cart() {
   const deletePro = async (userId, productId, userToken) => {
     try {
       const response = await axios.delete(
-        `${baseUrl}/users/${userId}/cart/${productId}`,
+        `/users/${userId}/cart/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${userToken}`,
@@ -101,15 +99,9 @@ function Cart() {
   };
 
   return (
-    <div>
+    <div className='w-full h-screen pt-4 overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-950 to-slate-500'>
       <div>
-        <div>
-        <h2 style={{ fontStyle: 'italic' }}>
-          <BsCart4 /> Your Cart
-        </h2>
-        </div>
-        <br />
-
+      <h2 className='font-serif'>Your Wishlist</h2>
         <div className="d-flex-col container">
           {cartItems.length > 0 ? (
             <Table striped bordered hover>
@@ -171,7 +163,7 @@ function Cart() {
                 alt=""
                 style={{ width: '400px' }}
               />
-              <h3>Cart is empty</h3>
+              <h3 className='text-white'>Cart is empty..!</h3>
             </div>
           )}
           {cartItems.length > 0 && (
