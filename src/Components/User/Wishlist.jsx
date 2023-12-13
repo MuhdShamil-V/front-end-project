@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { selectUserToken, selectUserid } from '../../redux/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLoading, selectUserToken, selectUserid, setIsLoading } from '../../redux/authSlice';
 import axios from '../AxiosInstance/instance';
 import { Card, Button, Row } from 'react-bootstrap';
 import toast from 'react-hot-toast';
+import Loading from './Loading';
 
 function Wishlist() {
   const userToken = useSelector(selectUserToken);
@@ -13,6 +14,8 @@ function Wishlist() {
 
 
   const [wishlist, setWishlist] = useState([]);
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
 
   const yourWishlist = async (userId, token) => {
     try {
@@ -36,7 +39,12 @@ function Wishlist() {
     }
   };
 
+  setTimeout( ()=> {
+    dispatch(setIsLoading(false))
+  }, 2000)
   useEffect(() => {
+    dispatch(setIsLoading(true))
+    
     yourWishlist(userId, userToken);
   }, [userId, userToken]);
 
@@ -97,6 +105,9 @@ function Wishlist() {
         ))}
       </Row>
       </div>
+      {
+        isLoading && <Loading />
+      }
     </div>
   );
 }

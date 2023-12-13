@@ -4,7 +4,7 @@ import '../Dealer/Login.css';
 import { Link, useNavigate } from "react-router-dom";
 import { BiSolidUser, BiSolidLockAlt } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIslogin, setToken, setUserToken ,setUserid, setUsername} from "../../redux/authSlice";
+import { setIsAdmin, setIslogin, setToken, setUserToken ,setUserid, setUsername} from "../../redux/authSlice";
 import toast from "react-hot-toast";
 import { useFormik } from 'formik';
 import { SignupValidation } from "../User/SignupValidation";
@@ -25,9 +25,6 @@ function Login() {
 
   }
   })
-  
-
-  const isSignIn = useSelector((state) => state.auth.isSignIn);
 
   const [state, setState] = useState("");
   
@@ -72,12 +69,13 @@ function Login() {
         const token = data.token;
         toast.success("Admin logged in successfully")
         dispatch(setToken(token)); 
+        dispatch(setIsAdmin(true))
         navigation("/admin");
       } else {
         toast.error("Admin already logged")
       }
     } catch (error) {
-      toast.error("Error:Network Error");
+      toast.error("Network Error");
     }
   }
     

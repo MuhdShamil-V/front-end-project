@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Login from "../Components/Dealer/Login";
-
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -10,10 +8,11 @@ export const authSlice = createSlice({
     userToken: localStorage.getItem('userToken') || null,
     isSignIn: true,
     isCart: false,
-    userId: localStorage.getItem('userId')|| null,
-    isLogin:localStorage.getItem('login')|| false,
-    userName:localStorage.getItem('userName')|| "",
+    userId: localStorage.getItem('userId') || null,
+    isLogin: localStorage.getItem('login') || false,
+    userName: localStorage.getItem('userName') || "",
     isLoading: true,
+    isAdmin: localStorage.getItem('isAdmin') || false, // New state variable for admin status
   },
   reducers: {
     setToken: (state, action) => {
@@ -43,28 +42,57 @@ export const authSlice = createSlice({
     },
     clearUserToken: (state) => {
       state.userToken = null;
-      localStorage.removeItem('userToken'); // Remove the user token from local storage
+      localStorage.removeItem('userToken');
     },
     clearUsername: (state) => {
       state.userName = "";
-      localStorage.removeItem('userName'); // Remove the user token from local storage
+      localStorage.removeItem('userName');
     },
     clearUserId: (state) => {
       state.userId = null;
-      localStorage.removeItem('userId'); // Remove the user token from local storage
+      localStorage.removeItem('userId');
     },
     setIslogin: (state, action) => {
       state.isLogin = action.payload;
-      localStorage.setItem('login',action.payload)
+      localStorage.setItem('login', action.payload);
     },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
-    
+    // New reducer to set admin status
+    setIsAdmin: (state, action) => {
+      state.isAdmin = action.payload;
+      localStorage.setItem('isAdmin', action.payload);
+    },
+    clearToken: (state) => {
+      state.token = null;
+      localStorage.removeItem('token')
+    },
+    clearIsAdmin: (state) => {
+      state.isAdmin = false;
+      // localStorage.setItem('isAdmin', false);
+      localStorage.removeItem('isAdmin');
+    }
   },
 });
 
-export const { setToken, setUserToken, setProducts ,setSignIn,clearUsername,setUsername, setUserid, setIScart, clearUserToken, clearUserId, setIslogin, setIsLoading} = authSlice.actions;
+export const {
+  setToken,
+  setUserToken,
+  setProducts,
+  setSignIn,
+  clearUsername,
+  setUsername,
+  setUserid,
+  setIScart,
+  clearUserToken,
+  clearUserId,
+  setIslogin,
+  setIsLoading,
+  setIsAdmin, 
+  clearToken,
+  clearIsAdmin,
+} = authSlice.actions;
 
 export const selectToken = (state) => state.auth.token;
 export const selectUserToken = (state) => state.auth.userToken;
@@ -75,5 +103,6 @@ export const selectIscart = (state) => state.auth.isCart;
 export const selectIslogin = (state) => state.auth.isLogin;
 export const selectUserName = (state) => state.auth.userName;
 export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectIsAdmin = (state) => state.auth.isAdmin; // New selector for admin status
 
 export default authSlice.reducer;

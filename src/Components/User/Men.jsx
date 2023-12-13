@@ -65,7 +65,7 @@ const Men = () => {
           console.log("Fetched products:", data);
           setTimeout( ()=> {
             dispatch(setIsLoading(false))
-          }, 4000);
+          }, 2000);
           dispatch(setProducts(data)); // Use setProductsAction instead of setProducts
         } else {
           console.error("Product retrieval failed. Message:", message);

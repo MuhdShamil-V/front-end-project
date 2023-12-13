@@ -37,7 +37,7 @@ function Cart() {
 
   setTimeout( ()=> {
     dispatch(setIsLoading(false))
-  }, 4000)
+  }, 2000)
   useEffect(() => {
     dispatch(setIsLoading(true))
 
@@ -101,7 +101,7 @@ function Cart() {
   return (
     <div className='w-full h-screen pt-4 overflow-x-hidden overflow-y-auto bg-gradient-to-r from-gray-950 to-slate-500'>
       <div>
-      <h2 className='font-serif'>Your Wishlist</h2>
+      <h2 className='font-serif'>Your Cart</h2>
         <div className="d-flex-col container">
           {cartItems.length > 0 ? (
             <Table striped bordered hover>

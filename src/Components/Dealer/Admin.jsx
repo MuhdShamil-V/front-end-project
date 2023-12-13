@@ -5,6 +5,9 @@ import AddProduct from './AddProduct';
 import UserList from './UserList';
 import { motion } from 'framer-motion';
 import { Avatar } from '@mui/material';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearIsAdmin, clearToken, selectIsAdmin, selectToken, setIsAdmin } from '../../redux/authSlice';
+
 
 const container = {
   hidden: { opacity: 1, scale: 0 },
@@ -29,9 +32,22 @@ const item = {
 function Admin() {
   const nav = useNavigate();
   const location = useLocation();
+
+  const dipatch = useDispatch();
+  const token = useSelector(selectToken);
+  const isAdmin = useSelector(selectIsAdmin);
+
+  console.log(isAdmin);
+
   const isProducts = location.pathname.includes('/admin/allproducts');
   const isAdd = location.pathname.includes('/admin/addproducts');
   const isUser = location.pathname.includes('/admin/userslist');
+
+  const Logout = ()=> {
+    dipatch(clearToken());
+    dipatch(clearIsAdmin())
+    nav("/home")
+  }
 
   return (
     <div className="h-screen w-full bg-sky-950 flex gap-20 justify-center">
@@ -80,6 +96,12 @@ function Admin() {
               Home
             </button>
           </motion.li>
+          <button
+              onClick={Logout}
+              className="block text-white no-underline w-full py-2 px-4 transition duration-300 hover:bg-emerald-300 rounded"
+            >
+              Logout
+            </button>
         </motion.ul>
       </div>
       <motion.div variants={container} initial="hidden" animate="visible" className="w-full ml-48 flex justify-center h-full p-8">
